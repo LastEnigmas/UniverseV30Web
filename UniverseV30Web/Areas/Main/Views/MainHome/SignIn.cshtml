@@ -1,0 +1,30 @@
+﻿@using Core.DTOs.MainViewModels
+@model SignInViewModel
+@{
+    Layout = null;
+}
+<h1>SignIn Page</h1>
+
+<form method="post">
+    <div class="input-group">
+        <input asp-for="UsernameOrEmail" type="text" class="form-control"  placeholder="Enter Your Email Or Username"/>
+    </div>
+    
+    <div class="input-group">
+        <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <button type="submit" class="btn btn-success">
+        SignIn
+    </button>
+    <button type="button">
+        <a asp-area="Main" asp-controller="MainHome" asp-action="Index">
+            Main Page
+        </a>
+    </button>
+    <button type="button">
+        <a asp-area="Main" asp-controller="MainHome" asp-action="ForgotPassword">
+            I Forgot My Password
+        </a>
+    </button>
+</form>

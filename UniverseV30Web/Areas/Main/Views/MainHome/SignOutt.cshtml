@@ -1,0 +1,24 @@
+﻿@using Core.DTOs.MainViewModels
+@model SignOutViewModel
+
+@{
+    Layout = null;
+}
+
+<h1>Sign Out @Model.Username</h1>
+
+<form method="post">
+
+    <input asp-for="AreYouSureStr" type="checkbox" value="True" />
+
+    <button type="submit">
+        SignOut
+    </button>
+    <button type="button">
+        <a asp-area="Main" asp-controller="MainHome" asp-action="Index">
+            Main Page
+        </a>
+    </button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+</form>
