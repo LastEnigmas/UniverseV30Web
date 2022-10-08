@@ -1,4 +1,5 @@
-﻿using Core.DTOs.AdminViewModel;
+﻿using Core.Convertor;
+using Core.DTOs.AdminViewModel;
 using Data.Model;
 using DataApp.MyDbContext;
 using System;
@@ -15,6 +16,52 @@ namespace Core.Services.AdminSer
         public AdminService(MyDbContext db)
         {
             _db = db;
+        }
+
+        public bool CheckForEdit(EditUserViewModel userEdit)
+        {
+            User user = GetUserById(userEdit.Id);
+            if(user.Username == userEdit.Username)
+            {
+                return false;
+            }else if(user.Email == userEdit.Email)
+            {
+                return false;
+            }
+
+            bool Result;
+            Result = IsEmail(FixText.FixTexts(userEdit.Email));
+            if(Result != true)
+            {
+                return false;
+            }
+
+            Result = IsUsername(FixText.FixTexts(userEdit.Username));
+            if(Result != true)
+            {
+                return false;
+            }
+
+            user.Username = userEdit.Username;
+            user.Email = userEdit.Email;
+            user.IsActive = userEdit.IsActive;
+
+            Update(user);
+            return true;
+        }
+
+        public EditUserViewModel EditUserById(int id)
+        {
+            EditUserViewModel user = new EditUserViewModel();
+            User user1 = new User();
+            user1 = GetUserById(id);
+
+            user.Id = user1.Id;
+            user.Username = user1.Username;
+            user.IsActive = user1.IsActive;
+            user.Email = user1.Email;
+
+            return user;
         }
 
         public AdmingetAllUserViewModel GetAllUser(int pageId = 1, string filterUsername = "", string filterEmail = "")
@@ -39,6 +86,32 @@ namespace Core.Services.AdminSer
             Userlist.Users = result.OrderBy(u => u.CreateTime).Skip(skip).Take(take).ToList();
 
             return Userlist;
+        }
+
+        public User GetUserById(int id)
+        {
+            return _db.Users.SingleOrDefault(u => u.Id == id);
+        }
+
+        public bool IsEmail(string email)
+        {
+            return _db.Users.Any(u => u.Email == email);
+        }
+
+        public bool IsUsername(string username)
+        {
+            return _db.Users.Any(u => u.Username == username);
+        }
+
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
+
+        public void Update(User user)
+        {
+            _db.Users.Update(user);
+            Save();
         }
     }
 }

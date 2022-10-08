@@ -1,0 +1,39 @@
+﻿@using Core.DTOs.AdminViewModel
+@model EditUserViewModel
+@{
+    Layout = null;
+}
+<h1>Edit User @Model.Username</h1>
+
+
+@if(ViewBag.IsEdit == true )
+{
+    <h1 class="text-danger">Done :)</h1>
+}
+<form method="post">
+    <div class="input-group">
+        <input asp-for="Email" type="text" value="@Model.Email" />
+    </div>
+    <div class="input-group">
+        <input asp-for="Username" type="text" value="@Model.Username" />
+    </div>
+    <div class="input-group">
+        <input asp-for="IsActiveStr" type="text" value="@Model.IsActiveStr" />
+    </div>
+
+    <button type="submit" class="btn-danger">
+        Edit
+    </button>
+    <button type="button">
+        <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index" >
+            Back To Main
+        </a>
+    </button>
+    <button type="button">
+        <a asp-area="Admin" asp-controller="AdminHome" asp-action="ChangePassword">
+            Change This User Password
+        </a>
+    </button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+</form>
