@@ -14,10 +14,13 @@ namespace Core.Services.AdminSer
         User GetUserById(int id);
         bool IsEmail(string email);
         bool IsUsername(string username);
+        bool DoDeleteUser(DeleteUserViewModel delete);
+        DeleteUserViewModel GetDeleteUser(int id);
         EditUserViewModel EditUserById(int id);
         bool CheckForEdit(EditUserViewModel userEdit);
         AdmingetAllUserViewModel GetAllUser(int pageId = 1, string filterUsername = "", string filterEmail = "");
         void Update(User user);
+        void Delete(User user);
         void Save();
     }
 }

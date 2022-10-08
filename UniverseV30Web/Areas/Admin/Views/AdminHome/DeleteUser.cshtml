@@ -1,0 +1,26 @@
+﻿@using Core.DTOs.AdminViewModel
+@model DeleteUserViewModel
+@{
+    Layout = null;
+}
+<h1>Delete User @Model.Username</h1>
+
+<form method="post">
+    <div class="input-group">
+        <input asp-for="Id" type="text" readonly />
+    </div>
+    <div class="input-group">
+        <input asp-for="Username" type="text" readonly />
+    </div>
+    <div class="input-group">
+        <input asp-for="Email" type="text" readonly />
+    </div>
+    <button type="submit" class="btn-danger">
+        Delete
+    </button>
+    <button type="button">
+        <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">
+            Back To Main
+        </a>
+    </button>
+</form>

@@ -50,6 +50,26 @@ namespace Core.Services.AdminSer
             return true;
         }
 
+        public void Delete(User user)
+        {
+            _db.Users.Remove(user);
+            Save();
+        }
+
+        public bool DoDeleteUser(DeleteUserViewModel delete)
+        {
+
+            User user = _db.Users.SingleOrDefault( u => u.Id == delete.Id);
+            if(user == null)
+            {
+                return false;
+            }
+
+            Delete(user);
+            return true;
+
+        }
+
         public EditUserViewModel EditUserById(int id)
         {
             EditUserViewModel user = new EditUserViewModel();
@@ -86,6 +106,24 @@ namespace Core.Services.AdminSer
             Userlist.Users = result.OrderBy(u => u.CreateTime).Skip(skip).Take(take).ToList();
 
             return Userlist;
+        }
+
+        public DeleteUserViewModel GetDeleteUser(int id)
+        {
+            User user = _db.Users.SingleOrDefault(u => u.Id == id);
+            if(user == null)
+            {
+                return null;
+            }
+
+            DeleteUserViewModel delete = new DeleteUserViewModel()
+            {
+                Id = id,
+                Username = user.Username,
+                Email = user.Email,
+            };
+
+            return delete;
         }
 
         public User GetUserById(int id)

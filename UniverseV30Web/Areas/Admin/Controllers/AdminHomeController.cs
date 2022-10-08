@@ -17,7 +17,7 @@ namespace UniverseV30Web.Areas.Admin.Controllers
         public IActionResult Index(int pageId = 1, string filterUsername = "", string filterEmail = "")
         {
             AdmingetAllUserViewModel allUser = new AdmingetAllUserViewModel();
-            allUser = _adminService.GetAllUser(pageId, filterEmail, filterUsername);
+            allUser = _adminService.GetAllUser(pageId, filterUsername, filterEmail);
             return View(allUser);
         }
 
@@ -74,11 +74,28 @@ namespace UniverseV30Web.Areas.Admin.Controllers
 
         #region Deleteuser
 
-        public IActionResult Deleteuser(int id)
+        [Route("DeleteUser")]
+        public IActionResult DeleteUser(int id)
         {
-            return View();
+            DeleteUserViewModel deleteUser = _adminService.GetDeleteUser(id);
+            if(deleteUser == null)
+            {
+                return NotFound();
+            }
+
+            return View(deleteUser);
+        }
+
+
+        [Route("DeleteUser")]
+        [HttpPost]
+        public IActionResult DeleteUser(DeleteUserViewModel delete)
+        {
+            ViewBag.IsDelete = _adminService.DoDeleteUser(delete);
+            return View(delete);
         }
 
         #endregion
+
     }
 }
