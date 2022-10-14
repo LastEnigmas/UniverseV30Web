@@ -19,6 +19,7 @@ namespace Data.Model
         [Required(ErrorMessage = "Required")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string Description { get; set; } = "";
         public bool IsActive { get; set; }
         public string ActiveCode { get; set; }
 

@@ -1,5 +1,6 @@
 using Core.Services.AdminSer;
 using Core.Services.MainSer;
+using Core.Services.ProfileSer;
 using DataApp.MyDbContext;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(
 builder.Services.AddScoped<IViewRenderService, RenderViewToString>();
 builder.Services.AddScoped<IMainService, MainService>();
 builder.Services.AddScoped<IAdminService , AdminService>();
-
+builder.Services.AddScoped<IProfileService, ProfileService>();
 #region Security
 builder.Services.AddAuthentication(options =>
 {

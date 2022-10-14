@@ -1,0 +1,48 @@
+﻿@using Core.DTOs.ProfileViewModel
+@model InfoUserViewModel
+@{
+    Layout = null;
+}
+<form method="post">
+    <div class="input-group">
+        <input type="text" asp-for="Email" value="@Model.Email" /> 
+    </div>
+
+    <div class="input-group">
+        <input type="text" asp-for="Username" value="@Model.Username" />
+    </div>
+
+    <div class="input-group">
+        <input type="text" asp-for="Description" value="@Model.Description" />
+    </div>
+
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <ul>
+        <li>
+            <button type="button">
+                <a asp-area="Profile" asp-controller="ProfileHome" asp-action="PasswordChange">
+                    Change Password
+                </a>
+            </button>
+        </li>
+        <li>
+            <button type="button">
+                <a asp-area="Profile" asp-controller="ProfileHome" asp-action="Universe">
+                    Universe
+                </a>
+            </button>
+        </li>
+        <li>
+            <button type="button">
+                <a asp-area="Profile" asp-controller="ProfileHome" asp-action="Index">
+                    Back To Main
+                </a>
+            </button>
+        </li>
+        <li>
+            <button type="submit">
+                Save
+            </button>
+        </li>
+    </ul>
+</form>

@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+<h1>@User.Identity.Name Univer </h1>
+
+<form>
+    <button type="button">
+        <a asp-area="Profile" asp-controller="ProfileHome" asp-action="InfoUniverse">
+            Edit Your Universe
+        </a>
+    </button>
+
+    <br />
+
+    <button type="button">
+        <a asp-area="Prifile" asp-controller="ProfileHome" asp-action="Universe">
+            Your Univers
+        </a>
+    </button>
+</form>
