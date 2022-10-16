@@ -40,6 +40,7 @@ namespace Core.Services.ProfileSer
                 Username = username,
                 Email = user.Email,
                 Description = user.Description,
+                UserProfileName = user.PictureTitle,
             };
 
             return infoUser;
@@ -91,9 +92,9 @@ namespace Core.Services.ProfileSer
             if(infoUser.UserProfile != null)
             {
                 string imagePath = "";
-                if(infoUser.UserProfileName != "defult.jpj")
+                if(infoUser.UserProfileName != "defult.jpg")
                 {
-                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", infoUser.UserProfileName);
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserProfile", infoUser.UserProfileName);
                     if (File.Exists(imagePath))
                     {
                         File.Delete(imagePath);
@@ -101,7 +102,7 @@ namespace Core.Services.ProfileSer
                 }
 
                 infoUser.UserProfileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(infoUser.UserProfile.FileName);
-                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", infoUser.UserProfileName);
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserProfile", infoUser.UserProfileName);
                 using(var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     infoUser.UserProfile.CopyTo(stream);

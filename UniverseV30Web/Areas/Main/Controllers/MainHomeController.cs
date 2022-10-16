@@ -64,7 +64,7 @@ namespace UniverseV30Web.Areas.Main.Controllers
                 Picture = "",
                 ActiveCode = ActiveCodeGen.GenerateCode(),
                 IsActive = false,
-                PictureTitle = "",
+                PictureTitle = "defult.jpg",
             };
 
             _mainService.Add(user);                                

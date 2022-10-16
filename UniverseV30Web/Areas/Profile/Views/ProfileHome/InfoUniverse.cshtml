@@ -20,7 +20,7 @@
 
     <div class="input-group">
         <input type="file" asp-for="UserProfile" />
-        <img class="thumbnail" src="/UserAvatar/@Model.UserProfileName" style="max-width: 150px" />
+        <img class="thumbnail" src="/UserProfile/@Model.UserProfileName" style="max-width: 150px" />
     </div>
 
     <input type="hidden" asp-for="Id" value="@Model.Id" />
