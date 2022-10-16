@@ -1,5 +1,7 @@
 ﻿using Core.DTOs.ProfileViewModel;
+using Core.Security;
 using Core.Services.ProfileSer;
+using Data.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +17,6 @@ namespace UniverseV30Web.Areas.Profile.Controllers
             _prifileService = profile;
         }
         public IActionResult Index() => View();
-
-        #region Universe
-
-        #endregion
 
         #region Info Universe
 
@@ -38,6 +36,38 @@ namespace UniverseV30Web.Areas.Profile.Controllers
             return View(infoUser);
         }
 
+        #endregion
+
+        #region PasswordChange
+
+        [Route("ChangePassword")]
+        public IActionResult ChangePassword() => View();
+
+        [Route("ChangePassword")]
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel changePassword)
+        {
+            User user = _prifileService.GetUserById(User.Identity.Name);
+            if (!ModelState.IsValid)
+            {
+                return View(changePassword);
+            }
+            changePassword.CurrentPassowrd = PasswordHashC.EncodePasswordMd5(changePassword.CurrentPassowrd);
+            if(changePassword.CurrentPassowrd != user.Password)
+            {
+                ViewBag.IsPassword = false;
+                ModelState.AddModelError("NewPassword", "Somthings Wrong");
+                return View(changePassword);
+            }
+
+            changePassword.NewPassword = PasswordHashC.EncodePasswordMd5(changePassword.NewPassword);
+            user.Password = changePassword.NewPassword;
+
+            _prifileService.Update(user);
+            ViewBag.IsPassword = true;
+
+            return View(changePassword);
+        }
         #endregion
     }
 }

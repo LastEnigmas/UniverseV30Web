@@ -11,6 +11,7 @@ namespace Core.Services.ProfileSer
     public interface IProfileService
     {
         InfoUserViewModel GetUserInfo(string username);
+        User GetUserById(string username);
         bool IsUsername(string username);
         bool IsEmail(string email);
         bool CheackEdit(InfoUserViewModel infoUser);

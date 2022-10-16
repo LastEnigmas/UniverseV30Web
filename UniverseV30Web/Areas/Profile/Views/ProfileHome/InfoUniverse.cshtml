@@ -20,7 +20,7 @@
     <ul>
         <li>
             <button type="button">
-                <a asp-area="Profile" asp-controller="ProfileHome" asp-action="PasswordChange">
+                <a asp-area="Profile" asp-controller="ProfileHome" asp-action="ChangePassword">
                     Change Password
                 </a>
             </button>
@@ -45,4 +45,7 @@
             </button>
         </li>
     </ul>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
 </form>

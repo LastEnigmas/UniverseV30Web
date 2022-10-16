@@ -130,5 +130,10 @@ namespace Core.Services.ProfileSer
         {
             return _db.Users.Any(u => u.Email == email);
         }
+
+        public User GetUserById(string username)
+        {
+            return _db.Users.SingleOrDefault(u => u.Username == username);
+        }
     }
 }
