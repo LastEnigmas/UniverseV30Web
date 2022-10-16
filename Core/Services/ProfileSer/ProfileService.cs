@@ -1,5 +1,6 @@
 ﻿using Core.Convertor;
 using Core.DTOs.ProfileViewModel;
+using Core.Generator;
 using Core.Security;
 using Core.Sender;
 using Data.Model;
@@ -86,9 +87,30 @@ namespace Core.Services.ProfileSer
                 }
             }
 
+            // Profile Picture 
+            if(infoUser.UserProfile != null)
+            {
+                string imagePath = "";
+                if(infoUser.UserProfileName != "defult.jpj")
+                {
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", infoUser.UserProfileName);
+                    if (File.Exists(imagePath))
+                    {
+                        File.Delete(imagePath);
+                    }
+                }
 
+                infoUser.UserProfileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(infoUser.UserProfile.FileName);
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", infoUser.UserProfileName);
+                using(var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    infoUser.UserProfile.CopyTo(stream);
+
+                }
+            }
+            
             user.Description = infoUser.Description;
-
+            user.Picture = infoUser.UserProfileName;
             Update(user);
             return true;
             

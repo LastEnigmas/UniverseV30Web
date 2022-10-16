@@ -21,4 +21,8 @@
     <ProjectReference Include="..\DataApp\DataApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\UserProfile\" />
+  </ItemGroup>
+
 </Project>

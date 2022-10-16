@@ -4,6 +4,8 @@
     Layout = null;
 }
 <form method="post">
+
+    <input type="hidden" asp-for="UserProfileName" />
     <div class="input-group">
         <input type="text" asp-for="Email" value="@Model.Email" /> 
     </div>
@@ -14,6 +16,11 @@
 
     <div class="input-group">
         <input type="text" asp-for="Description" value="@Model.Description" />
+    </div>
+
+    <div class="input-group">
+        <input type="file" asp-for="UserProfile" />
+        <img class="thumbnail" src="/UserAvatar/@Model.UserProfileName" style="max-width: 150px" />
     </div>
 
     <input type="hidden" asp-for="Id" value="@Model.Id" />
