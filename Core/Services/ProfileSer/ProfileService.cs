@@ -113,6 +113,8 @@ namespace Core.Services.ProfileSer
                     user.PictureTitle = infoUser.UserProfileName;
                 }
             }
+
+
             Update(user);
             return true;
             
@@ -139,10 +141,6 @@ namespace Core.Services.ProfileSer
             _db.Update(user);
             Save();
         }
-        public void Save()
-        {
-            _db.SaveChanges();
-        }
         public bool IsUsername(string username)
         {
             return _db.Users.Any(u => u.Username == username);
@@ -154,6 +152,10 @@ namespace Core.Services.ProfileSer
         public User GetUserById(string username)
         {
             return _db.Users.SingleOrDefault(u => u.Username == username);
+        }
+        public void Save()
+        {
+            _db.SaveChanges();
         }
     }
 }

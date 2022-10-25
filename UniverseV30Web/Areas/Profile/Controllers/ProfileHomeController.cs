@@ -35,7 +35,7 @@ namespace UniverseV30Web.Areas.Profile.Controllers
         {
             ViewBag.IsCheack = _prifileService.CheackEdit(infoUser);
             HttpContext.SignOutAsync();
-            return RedirectToAction("Main/MainHome/Index");
+            return Redirect("Main/MainHome/Index");
         }
 
         #endregion
@@ -67,8 +67,8 @@ namespace UniverseV30Web.Areas.Profile.Controllers
 
             _prifileService.Update(user);
             ViewBag.IsPassword = true;
-
-            return View(changePassword);
+            HttpContext.SignOutAsync();
+            return Redirect("Main/MainHome/Index");
         }
         #endregion
     }
