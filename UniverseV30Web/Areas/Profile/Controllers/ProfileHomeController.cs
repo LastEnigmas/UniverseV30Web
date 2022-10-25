@@ -2,6 +2,7 @@
 using Core.Security;
 using Core.Services.ProfileSer;
 using Data.Model;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +34,8 @@ namespace UniverseV30Web.Areas.Profile.Controllers
         public IActionResult InfoUniverse(InfoUserViewModel infoUser)
         {
             ViewBag.IsCheack = _prifileService.CheackEdit(infoUser);
-            return View(infoUser);
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Main/MainHome/Index");
         }
 
         #endregion

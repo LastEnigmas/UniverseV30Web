@@ -25,7 +25,6 @@ namespace Core.Services.ProfileSer
         }
 
 
-
         public InfoUserViewModel GetUserInfo(string username)
         {
             User user = _db.Users.SingleOrDefault(u => u.Username == username);
@@ -47,6 +46,7 @@ namespace Core.Services.ProfileSer
         }
         public bool CheackEdit(InfoUserViewModel infoUser)
         {
+            bool EmailChangeFlag = false;
             User user = _db.Users.SingleOrDefault(u => u.Id == infoUser.Id);
             if(user == null)
             {
@@ -64,7 +64,7 @@ namespace Core.Services.ProfileSer
                 else
                 {
                     bool Result;
-                    Result = SendNewConfirmEmail(user);
+                    Result = SendNewConfirmEmail(user , FixText.FixTexts(infoUser.Email) );
                     if (Result != true)
                     {
                         return false;
@@ -72,6 +72,7 @@ namespace Core.Services.ProfileSer
 
                     user.IsActive = false;
                     user.Email = FixText.FixTexts(infoUser.Email);
+                    EmailChangeFlag = true ;
                 }
             }
 
@@ -107,16 +108,16 @@ namespace Core.Services.ProfileSer
                 {
                     infoUser.UserProfile.CopyTo(stream);
 
+                    user.Description = infoUser.Description;
+                    user.Picture = infoUser.UserProfileName;
+                    user.PictureTitle = infoUser.UserProfileName;
                 }
             }
-            
-            user.Description = infoUser.Description;
-            user.Picture = infoUser.UserProfileName;
             Update(user);
             return true;
             
         }
-        public bool SendNewConfirmEmail(User user)
+        public bool SendNewConfirmEmail(User user ,  string userNewEmail )
         {
             /* When User Want Change His Email
              * We Send Her An Email and we riderect
@@ -124,15 +125,14 @@ namespace Core.Services.ProfileSer
              */
             try
             {
-                string Body = _render.RenderToStringAsync("registerView", user);
-                EmailSenders.Send(user.Email, "Register", Body);
+                string Body = _render.RenderToStringAsync("RegisterEditView", user);
+                EmailSenders.Send(userNewEmail, "Register", Body);
                 return true;
 
             }catch(Exception e)
             {
                 return false;
             }
-
         }
         public void Update(User user)
         {
@@ -143,17 +143,14 @@ namespace Core.Services.ProfileSer
         {
             _db.SaveChanges();
         }
-
         public bool IsUsername(string username)
         {
             return _db.Users.Any(u => u.Username == username);
         }
-
         public bool IsEmail(string email)
         {
             return _db.Users.Any(u => u.Email == email);
         }
-
         public User GetUserById(string username)
         {
             return _db.Users.SingleOrDefault(u => u.Username == username);

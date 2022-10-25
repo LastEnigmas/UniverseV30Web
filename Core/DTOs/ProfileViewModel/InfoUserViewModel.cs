@@ -18,9 +18,9 @@ namespace Core.DTOs.ProfileViewModel
         [EmailAddress]
         public string Email { get; set; }
         public string Description { get; set; }
-
         public string UserProfileName { get; set; }
         public IFormFile UserProfile { get; set; }
+
 
         //public int Phonenumber { get; set; }
     }

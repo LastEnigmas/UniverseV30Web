@@ -21,4 +21,9 @@
     <ProjectReference Include="..\DataApp\DataApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Global\Data\" />
+    <Folder Include="Areas\Global\Models\" />
+  </ItemGroup>
+
 </Project>

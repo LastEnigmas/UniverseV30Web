@@ -1,0 +1,31 @@
+﻿@using Core.DTOs.MainViewModels
+@model RegisterViewModel
+@{
+    Layout = null;
+}
+
+@if (ViewBag.IsRegister)
+{
+    <h2>Hello @Model.Username </h2>
+    <p>Your Page Register Now !</p>
+    <ul>
+        <li>
+            <button type="button" class="btn-success">
+                <a asp-area="Main" asp-controller="MainHome" asp-action="SignIn">
+                    SignIn Now
+                </a>
+            </button>
+        </li>
+    </ul>
+}
+else
+{
+    <h1>Sorry Somthing Wrong</h1>
+    <br />
+
+    <button type="button" class="btn-danger">
+        <a asp-area="Main" asp-controller="MainHome" asp-action="SignUp">
+            SignUp Now!
+        </a>
+    </button>
+}

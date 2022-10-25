@@ -3,7 +3,7 @@
 @{
     Layout = null;
 }
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 
     <input type="hidden" asp-for="UserProfileName" />
     <div class="input-group">
@@ -19,8 +19,8 @@
     </div>
 
     <div class="input-group">
-        <input type="file" asp-for="UserProfile" />
-        <img class="thumbnail" src="/UserProfile/@Model.UserProfileName" style="max-width: 150px" />
+        <input type="file" asp-for="UserProfile" id="MyFile" runat="server" />
+    <img class="thumbnail" src="/UserProfile/@Model.UserProfileName" style="max-width: 150px" />
     </div>
 
     <input type="hidden" asp-for="Id" value="@Model.Id" />
@@ -53,6 +53,5 @@
         </li>
     </ul>
 
-    <div asp-validation-summary="All" class="text-danger"></div>
 
 </form>

@@ -15,7 +15,7 @@ namespace Core.Services.ProfileSer
         bool IsUsername(string username);
         bool IsEmail(string email);
         bool CheackEdit(InfoUserViewModel infoUser);
-        bool SendNewConfirmEmail(User user);
+        bool SendNewConfirmEmail(User user , string userNewEmail );
         void Update(User users);
         void Save();
     }

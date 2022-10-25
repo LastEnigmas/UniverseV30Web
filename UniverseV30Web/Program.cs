@@ -1,4 +1,5 @@
 using Core.Services.AdminSer;
+using Core.Services.GlobalSer;
 using Core.Services.MainSer;
 using Core.Services.ProfileSer;
 using DataApp.MyDbContext;
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IViewRenderService, RenderViewToString>();
 builder.Services.AddScoped<IMainService, MainService>();
 builder.Services.AddScoped<IAdminService , AdminService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IGlobolService , GlobalService>();
 #region Security
 builder.Services.AddAuthentication(options =>
 {

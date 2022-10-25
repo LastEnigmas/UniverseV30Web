@@ -11,26 +11,17 @@ namespace Data.Model
     {
         [Key]
         public int Id { get; set; }
-
         [Required(ErrorMessage = "Required")]
         [Display(Name = "Username")]
         public string Username { get; set; }
-
         [Required(ErrorMessage = "Required")]
         [Display(Name = "Email")]
         public string Email { get; set; }
         public string Description { get; set; } = "";
         public bool IsActive { get; set; }
         public string ActiveCode { get; set; }
-
         public DateTime CreateTime { get; set; } = DateTime.Now;
-
-        [Required(ErrorMessage = "Required")]
-        [Display(Name = "Picture")]
         public string Picture { get; set; }
-
-        [Required(ErrorMessage = "Required")]
-        [Display(Name = "Picture Title")]
         public string PictureTitle { get; set; }
 
         [Required(ErrorMessage = "Required")]

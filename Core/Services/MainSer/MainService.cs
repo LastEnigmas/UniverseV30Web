@@ -24,12 +24,10 @@ namespace Core.Services.MainSer
             _db.Users.Add(user);
             Save();
         }
-
         public User GetUserByActiveCode(string activecode)
         {
             return _db.Users.SingleOrDefault(u => u.ActiveCode == activecode);
         }
-
         public User GetUserForgotPass(string usernameOrEmail)
         {
             User user = _db.Users.FirstOrDefault(x => x.Username == usernameOrEmail || x.Email == usernameOrEmail);
@@ -108,7 +106,6 @@ namespace Core.Services.MainSer
             _db.Update(user);
             Save();
         }
-
         public RegisterViewModel UsernameEmailModel(string activecode)
         {
 
