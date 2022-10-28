@@ -1,0 +1,34 @@
+﻿@using Core.DTOs.UniverseViewModel
+@model ArticleViewModel
+@{
+    Layout = null;
+}
+ <h1>Create Universe</h1>
+
+ <form method="post">
+     <div class="input-group">
+        <input asp-for="Title" type="text" placeholder="Title" enctype="multipart/form-data />
+     </div>
+     
+     <div class="input-group">
+        <textarea asp-for="ShortDescription" rows="5" cols="60" placeholder="Your Short Description">
+
+        </textarea>
+     </div>
+
+     <div class="input-group">
+         <textarea asp-for="Body" rows="10" cols="120" placeholder="Body"></textarea>
+     </div>
+
+     <div class="input-group">
+         <input asp-for="Author" type="text" placeholder="Author Name"/>
+     </div>
+
+     <div class="input-group">
+        <input type="file" asp-for="ArticleProfile" runat="server" />
+     </div>
+
+     <div class="input-group">
+         <input asp-for="LinkUrl" type="url" placeholder="Your Social Network Url" />
+     </div>
+ </form>
