@@ -19,6 +19,8 @@ namespace Core.Services.AdminSer
         EditUserViewModel EditUserById(int id);
         bool CheckForEdit(EditUserViewModel userEdit);
         AdmingetAllUserViewModel GetAllUser(int pageId = 1, string filterUsername = "", string filterEmail = "");
+        bool IsSubject(string subjectName);
+        void CreateSubject(Subject subject);
         void Update(User user);
         void Delete(User user);
         void Save();

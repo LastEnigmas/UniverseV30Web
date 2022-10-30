@@ -1,4 +1,5 @@
-﻿using Core.DTOs.AdminViewModel;
+﻿using Core.Convertor;
+using Core.DTOs.AdminViewModel;
 using Core.Services.AdminSer;
 using Data.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace UniverseV30Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class AdminHomeController : Controller
     {
         private readonly IAdminService _adminService;
@@ -93,6 +95,52 @@ namespace UniverseV30Web.Areas.Admin.Controllers
         {
             ViewBag.IsDelete = _adminService.DoDeleteUser(delete);
             return View(delete);
+        }
+
+        #endregion
+
+        #region Create Subject
+
+        [Route("CreateSubject")]
+        public IActionResult CreateSubject() => View();
+
+        [Route("CreateSubject")]
+        [HttpPost]
+        public IActionResult CreateSubject(SubjectViewModel subject)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(subject);
+            }
+
+            if(subject.SubjectName == null || subject.SubjectName.Length < 2)
+            {
+                ModelState.AddModelError("SubjectName", "subject name must more than 2 charecter");
+                return View();
+            }
+
+            if(subject.Description.Length < 15 || subject.Description == null)
+            {
+                ModelState.AddModelError("Description", "subject description name must more than 15 charecter");
+                return View();
+            }
+
+            if (_adminService.IsSubject(FixText.FixTexts(subject.SubjectName)))
+            {
+                ModelState.AddModelError("SubjectName", "Is Exist");
+                return View(subject);
+            }
+
+
+            Subject Mysubject = new Subject()
+            {
+                Description = subject.Description,
+                SubjectName = FixText.FixTexts(subject.SubjectName),
+            };
+
+            _adminService.CreateSubject(Mysubject);
+            ViewBag.IsCreate = true;
+            return View();
         }
 
         #endregion

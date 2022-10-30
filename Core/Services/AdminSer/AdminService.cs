@@ -50,6 +50,12 @@ namespace Core.Services.AdminSer
             return true;
         }
 
+        public void CreateSubject(Subject subject)
+        {
+            _db.Subjects.Add(subject);
+            Save();
+        }
+
         public void Delete(User user)
         {
             _db.Users.Remove(user);
@@ -134,6 +140,11 @@ namespace Core.Services.AdminSer
         public bool IsEmail(string email)
         {
             return _db.Users.Any(u => u.Email == email);
+        }
+
+        public bool IsSubject(string subjectName)
+        {
+            return _db.Subjects.Any(u => u.SubjectName == subjectName);
         }
 
         public bool IsUsername(string username)

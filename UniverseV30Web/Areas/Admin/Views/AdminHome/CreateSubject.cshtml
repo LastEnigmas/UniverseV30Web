@@ -1,0 +1,32 @@
+﻿@using Core.DTOs.AdminViewModel
+@model SubjectViewModel
+@{
+    Layout = null;
+}
+
+@if(ViewBag.IsCreate == true )
+{
+    <h1 class="alert-success" >Create</h1>
+}
+
+<h1>Create Subject</h1>
+
+<form method="post">
+    <div class="input-group">
+        <input asp-for="SubjectName" placeholder="Subject Name" /> 
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Description" placeholder="Subject Description" />
+    </div>
+
+    <button type="submit">
+        Create
+    </button>
+</form>
+
+<button type="button">
+    <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">
+        main
+    </a>
+</button>
