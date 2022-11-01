@@ -14,6 +14,10 @@ namespace Data.Model
         public int ArticleId { get; set; }
 
         [Required(ErrorMessage = "Required")]
+        [Display(Name = "Username")]
+        public string UsernameUser { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         [Display(Name = "Title")]
         public string Title { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using Core.DTOs.UniverseViewModel;
 using Core.Services.UniverseSer;
+using Data.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,37 @@ namespace UniverseV30Web.Areas.UniverseHelp.Controllers
 
         public IActionResult CreateUniverse(ArticleViewModel article)
         {
+            ViewBag.IsTextt = true;
+            ViewBag.IsUrll = true;
+            ViewBag.IsImagee = true;
+
+            if (!_universeService.IsText(article))
+            {
+                ViewBag.IsTextt = false;
+                return View(article);
+            }
+
+            if (!_universeService.IsLink(article.LinkUrl))
+            {
+                ViewBag.IsUrll = false;
+                return View(article);
+            }
+
+            if (!_universeService.IsImage(article.ArticleProfile))
+            {
+                ViewBag.IsImagee = false;
+                return View(article);
+            }
+
+            Article MyArticle = new Article()
+            {
+                UsernameUser = User.Identity.Name,
+                LinkUrl = article.LinkUrl,
+                ShortDescription = article.ShortDescription,
+                Body = article.Body,
+                Author = article.Author,
+            };
+
             return View();
         }
 
