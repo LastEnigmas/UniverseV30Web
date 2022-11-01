@@ -2,6 +2,7 @@ using Core.Services.AdminSer;
 using Core.Services.GlobalSer;
 using Core.Services.MainSer;
 using Core.Services.ProfileSer;
+using Core.Services.UniverseSer;
 using DataApp.MyDbContext;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ builder.Services.AddScoped<IMainService, MainService>();
 builder.Services.AddScoped<IAdminService , AdminService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IGlobolService , GlobalService>();
+builder.Services.AddScoped<IUniverseService, UniverseService>();
 #region Security
 builder.Services.AddAuthentication(options =>
 {

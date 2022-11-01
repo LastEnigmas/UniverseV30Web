@@ -1,26 +1,21 @@
 ﻿using Core.DTOs.UniverseViewModel;
 using Core.Services.UniverseSer;
-using Data.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UniverseV30Web.Areas.Universe.Controllers
+namespace UniverseV30Web.Areas.UniverseHelp.Controllers
 {
-    [Area("Unviverse")]
+
+    [Area("UniverseHelp")]
     [Authorize]
-    public class UniverseHomeController : Controller
+    public class UniverseHelperHomeController : Controller
     {
         private readonly IUniverseService _universeService;
-
-        public UniverseHomeController(IUniverseService universeService)
+        public UniverseHelperHomeController(IUniverseService universeService)
         {
             _universeService = universeService;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         #region Create Universe
 
