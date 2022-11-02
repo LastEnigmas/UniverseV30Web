@@ -1,4 +1,5 @@
 ﻿using Core.DTOs.UniverseViewModel;
+using Core.Generator;
 using Data.Model;
 using DataApp.MyDbContext;
 using Microsoft.AspNetCore.Http;
@@ -18,8 +19,48 @@ namespace Core.Services.UniverseSer
             _db = db;
         }
 
-        public void AddArticle(Article article)
+        public void AddArticle(Article article , ArticleViewModel viewModel )
         {
+
+
+            // Profile Picture 
+
+            if( viewModel.ArticleProfile != null)
+            {
+                string imagePath = "";
+                if(viewModel.Picture != "uniDef.jpg")
+                {
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ArticlePicture", viewModel.Picture);
+                    if (File.Exists(imagePath))
+                    {
+                        File.Delete(imagePath);
+                    }
+                }
+            }
+            //if (infoUser.UserProfile != null)
+            //{
+            //    string imagePath = "";
+            //    if (infoUser.UserProfileName != "defult.jpg")
+            //    {
+            //        imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserProfile", infoUser.UserProfileName);
+            //        if (File.Exists(imagePath))
+            //        {
+            //            File.Delete(imagePath);
+            //        }
+            //    }
+
+            //    infoUser.UserProfileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(infoUser.UserProfile.FileName);
+            //    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserProfile", infoUser.UserProfileName);
+            //    using (var stream = new FileStream(imagePath, FileMode.Create))
+            //    {
+            //        infoUser.UserProfile.CopyTo(stream);
+
+            //        user.Description = infoUser.Description;
+            //        user.PictureTitle = infoUser.UserProfileName;
+            //    }
+            //}
+
+
             _db.Articles.Add(article);
             Save();
         }

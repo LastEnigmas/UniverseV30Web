@@ -56,12 +56,16 @@ namespace UniverseV30Web.Areas.UniverseHelp.Controllers
             Article MyArticle = new Article()
             {
                 UsernameUser = User.Identity.Name,
+                Title = article.Title,
                 LinkUrl = article.LinkUrl,
                 ShortDescription = article.ShortDescription,
                 Body = article.Body,
                 Author = article.Author,
+                SubjectId = article.SubjectId,
             };
 
+
+            
             return View();
         }
 
