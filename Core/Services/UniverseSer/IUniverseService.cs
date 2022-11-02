@@ -14,6 +14,7 @@ namespace Core.Services.UniverseSer
         bool IsText(ArticleViewModel article);
         bool IsLink(string link);
         bool IsImage(IFormFile file );
+        string FindSubject(int subjectId);
         void AddArticle(Article article , ArticleViewModel viewModel);
         void Save();
     }

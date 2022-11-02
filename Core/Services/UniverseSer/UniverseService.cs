@@ -24,45 +24,33 @@ namespace Core.Services.UniverseSer
 
 
             // Profile Picture 
-
             if( viewModel.ArticleProfile != null)
             {
                 string imagePath = "";
-                if(viewModel.Picture != "uniDef.jpg")
+                viewModel.PictureTitle = NameGenerator.GenerateUniqCode() + Path.GetExtension(viewModel.ArticleProfile.FileName);
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ArticlePicture", viewModel.PictureTitle);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
-                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ArticlePicture", viewModel.Picture);
-                    if (File.Exists(imagePath))
-                    {
-                        File.Delete(imagePath);
-                    }
+                    viewModel.ArticleProfile.CopyTo(stream);
+                    article.Picture = viewModel.PictureTitle;
+                    article.PictureTitle = viewModel.PictureTitle;
                 }
             }
-            //if (infoUser.UserProfile != null)
-            //{
-            //    string imagePath = "";
-            //    if (infoUser.UserProfileName != "defult.jpg")
-            //    {
-            //        imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserProfile", infoUser.UserProfileName);
-            //        if (File.Exists(imagePath))
-            //        {
-            //            File.Delete(imagePath);
-            //        }
-            //    }
-
-            //    infoUser.UserProfileName = NameGenerator.GenerateUniqCode() + Path.GetExtension(infoUser.UserProfile.FileName);
-            //    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserProfile", infoUser.UserProfileName);
-            //    using (var stream = new FileStream(imagePath, FileMode.Create))
-            //    {
-            //        infoUser.UserProfile.CopyTo(stream);
-
-            //        user.Description = infoUser.Description;
-            //        user.PictureTitle = infoUser.UserProfileName;
-            //    }
-            //}
-
+            
 
             _db.Articles.Add(article);
             Save();
+        }
+
+        public string FindSubject(int subjectId)
+        {
+            Subject subject = _db.Subjects.SingleOrDefault( u => u.SubjectId == subjectId);
+            if(subject != null)
+            {
+                return subject.SubjectName;
+            }
+
+            return "NoData";
         }
 
         public bool IsImage(IFormFile file)

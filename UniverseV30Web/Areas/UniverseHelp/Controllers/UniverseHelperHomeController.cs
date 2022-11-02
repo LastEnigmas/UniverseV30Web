@@ -28,7 +28,6 @@ namespace UniverseV30Web.Areas.UniverseHelp.Controllers
 
         [Route("CreateUniverse")]
         [HttpPost]
-
         public IActionResult CreateUniverse(ArticleViewModel article)
         {
             ViewBag.IsTextt = true;
@@ -64,8 +63,7 @@ namespace UniverseV30Web.Areas.UniverseHelp.Controllers
                 SubjectId = article.SubjectId,
             };
 
-
-            
+            _universeService.AddArticle(MyArticle, article);
             return View();
         }
 
