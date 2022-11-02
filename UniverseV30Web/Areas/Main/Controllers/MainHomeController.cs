@@ -71,6 +71,7 @@ namespace UniverseV30Web.Areas.Main.Controllers
             string Body = _render.RenderToStringAsync("registerView", user);
             EmailSenders.Send(user.Email, "Register", Body);
 
+            ViewBag.IsTrue = true;
             return View();
         }
 

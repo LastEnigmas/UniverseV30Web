@@ -3,7 +3,11 @@
 @{
     Layout = null;
 }
-
+@if(ViewBag.IsTrue == true )
+{
+    // aria front code
+    //Email Sent
+}
 <h2>SignUp Page</h2>
 
 <form asp-area="Main" asp-controller="MainHome" asp-action="SignUp" method="post">

@@ -109,7 +109,6 @@ namespace Core.Services.ProfileSer
                     infoUser.UserProfile.CopyTo(stream);
 
                     user.Description = infoUser.Description;
-                    user.Picture = infoUser.UserProfileName;
                     user.PictureTitle = infoUser.UserProfileName;
                 }
             }
