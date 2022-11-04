@@ -68,5 +68,16 @@ namespace UniverseV30Web.Areas.UniverseHelp.Controllers
         }
 
         #endregion
+
+
+        #region MyUniverse
+
+        public IActionResult MyUniverse(int pageId = 1, string filterTitle = "", string filterSubject = "")
+        {
+            ShowAllArticleViewModel articles = _universeService.ShowSmallArticle(pageId, filterTitle, filterSubject);
+            return View(articles);
+        }
+
+        #endregion
     }
 }

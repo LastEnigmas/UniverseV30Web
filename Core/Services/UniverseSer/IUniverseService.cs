@@ -16,6 +16,7 @@ namespace Core.Services.UniverseSer
         bool IsImage(IFormFile file );
         string FindSubject(int subjectId);
         void AddArticle(Article article , ArticleViewModel viewModel);
+        ShowAllArticleViewModel ShowSmallArticle(int pageId = 1, string filterTitle = "", string filterSubject = "");
         void Save();
     }
 }

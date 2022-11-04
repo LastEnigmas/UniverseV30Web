@@ -90,5 +90,30 @@ namespace Core.Services.UniverseSer
         {
             _db.SaveChanges();
         }
+
+        public ShowAllArticleViewModel ShowSmallArticle(int pageId = 1, string filterTitle = "", string filterSubject = "")
+        {
+            IQueryable<Article> result = _db.Articles;
+
+            if (!string.IsNullOrEmpty(filterTitle))
+            {
+                result = result.Where( u => u.Title == filterTitle );
+            }
+
+            if (!string.IsNullOrEmpty(filterSubject))
+            {
+                result = result.Where(u => u.Subject.SubjectName == filterSubject);
+            }
+
+            int take = 20;
+            int skip = (pageId - 1) * take;
+
+            ShowAllArticleViewModel articleList = new ShowAllArticleViewModel();
+            articleList.CurrentPage = pageId;
+            articleList.articles = result.OrderBy(u => u.PictureTitle).Skip(skip).Take(take).ToList();
+
+            return articleList;
+
+        }
     }
 }
