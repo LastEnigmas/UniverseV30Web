@@ -25,7 +25,7 @@ namespace Core.Services.UniverseSer
 
             // Profile Picture 
             if( viewModel.ArticleProfile != null)
-            {
+            { 
                 string imagePath = "";
                 viewModel.PictureTitle = NameGenerator.GenerateUniqCode() + Path.GetExtension(viewModel.ArticleProfile.FileName);
                 imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ArticlePicture", viewModel.PictureTitle);
